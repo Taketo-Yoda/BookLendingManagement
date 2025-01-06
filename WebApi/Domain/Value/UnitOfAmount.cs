@@ -13,6 +13,10 @@ public class UnitOfAmount
         {
             throw new InvalidOperationException("Value is negative");
         }
+        if (Value > 1000)
+        {
+            throw new InvalidOperationException("Value is too big");
+        }
         this.Value = Value;
     }
 

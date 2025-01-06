@@ -24,4 +24,25 @@ public class Initialize
         var exception = Assert.Throws<InvalidOperationException>(() => new UnitOfAmount(-1));
         Assert.Equal("Value is negative", exception.Message);
     }
+
+    [Fact]
+    public void TestThresholdValue001()
+    {
+        UnitOfAmount uom = new UnitOfAmount(999);
+        Assert.Equal(999, uom.Value);
+    }
+
+    [Fact]
+    public void TestThresholdValue002()
+    {
+        UnitOfAmount uom = new (1000);
+        Assert.Equal(1000, uom.Value);
+    }
+
+    [Fact]
+    public void TestThresholdValue003()
+    {
+        var exception = Assert.Throws<InvalidOperationException>(() => new UnitOfAmount(1001));
+        Assert.Equal("Value is too big", exception.Message);
+    }
 }
