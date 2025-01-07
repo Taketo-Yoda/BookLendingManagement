@@ -1,28 +1,47 @@
 using System.ComponentModel;
 using System.Reflection.Metadata.Ecma335;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using Microsoft.OpenApi.Any;
 
 namespace WebApi.Domain.Value;
-public class UnitOfAmount
+public record UnitOfAmount
 {
-    public decimal Value { get; }
+    public decimal Value {get; init;}
 
-    public UnitOfAmount(decimal Value)
+    public UnitOfAmount(decimal value)
     {
-        if (Value < 0)
+        Validate(value);
+        Value = value;
+    }
+
+    private void Validate(decimal value)
+    {
+        if (value < 0)
         {
             throw new InvalidOperationException("Value is negative");
         }
-        if (Value > 1000)
+        if (value > 1000)
         {
             throw new InvalidOperationException("Value is too big");
         }
-        this.Value = Value;
+    }
+
+    public UnitOfAmount Add(decimal val)
+    {
+        Validate(val);
+        return new(Value + val);
     }
 
     public UnitOfAmount Add(UnitOfAmount any)
     {
         return new(Value + any.Value);
+    }
+
+    public UnitOfAmount Minus(decimal val)
+    {
+        Validate(val);
+        return new(Value + val);
     }
 
     public UnitOfAmount Minus(UnitOfAmount any)
