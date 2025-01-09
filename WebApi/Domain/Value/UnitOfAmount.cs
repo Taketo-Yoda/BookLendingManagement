@@ -41,12 +41,12 @@ public record UnitOfAmount
     public UnitOfAmount Minus(decimal val)
     {
         Validate(val);
-        return new(Value + val);
+        return new(Value - val);
     }
 
     public UnitOfAmount Minus(UnitOfAmount any)
     {
-        return new(Value + any.Value);
+        return new(Value - any.Value);
     }
 
     public static UnitOfAmount operator +(UnitOfAmount a, UnitOfAmount b)
