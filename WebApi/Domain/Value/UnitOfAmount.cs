@@ -7,7 +7,7 @@ using Microsoft.OpenApi.Any;
 namespace WebApi.Domain.Value;
 public record UnitOfAmount
 {
-    public decimal Value {get; init;}
+    public decimal Value { get; init; }
 
     public UnitOfAmount(decimal value)
     {
