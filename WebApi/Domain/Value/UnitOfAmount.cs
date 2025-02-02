@@ -58,4 +58,54 @@ public record UnitOfAmount
     {
         return a.Minus(b);
     }
+
+    public static UnitOfAmount operator +(UnitOfAmount a, decimal b)
+    {
+        return a.Add(b);
+    }
+
+    public static UnitOfAmount operator -(UnitOfAmount a, decimal b)
+    {
+        return a.Minus(b);
+    }
+
+    public static bool operator >(UnitOfAmount a, UnitOfAmount b)
+    {
+        return a.Value > b.Value;
+    }
+
+    public static bool operator <(UnitOfAmount a, UnitOfAmount b)
+    {
+        return a.Value < b.Value;
+    }
+
+    public static bool operator >(UnitOfAmount a, decimal b)
+    {
+        return a.Value > b;
+    }
+
+    public static bool operator <(UnitOfAmount a, decimal b)
+    {
+        return a.Value < b;
+    }
+
+    public static bool operator >=(UnitOfAmount a, UnitOfAmount b)
+    {
+        return a.Value >= b.Value;
+    }
+
+    public static bool operator <=(UnitOfAmount a, UnitOfAmount b)
+    {
+        return a.Value <= b.Value;
+    }
+
+    public static bool operator >=(UnitOfAmount a, decimal b)
+    {
+        return a.Value >= b;
+    }
+
+    public static bool operator <=(UnitOfAmount a, decimal b)
+    {
+        return a.Value <= b;
+    }
 }
