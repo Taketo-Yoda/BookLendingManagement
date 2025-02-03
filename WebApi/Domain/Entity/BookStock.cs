@@ -30,10 +30,6 @@ public class BookStock
 
     public void MinusStock()
     {
-        if (_stock <= 0)
-        {
-            throw new InvalidDataException("Not exists stock.");
-        }
         _stock = _stock.Minus(1);
     }
 }
