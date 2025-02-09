@@ -10,10 +10,10 @@ public class Minus
         UnitOfAmount uom = new(5);
         UnitOfAmount bef = uom;
 
-        // 例外の確認
-        var exception = Assert.Throws<InvalidOperationException>(() => uom.Minus(-1));
-        // エラーメッセージの確認
-        Assert.Equal("Value is negative", exception.Message);
+        UnitOfAmount result = uom.Minus(-1);
+
+        // 結果の確認
+        Assert.Equal(6, result.Value);
         // イミュータブルであることの確認
         Assert.Equal(5, uom.Value);
         Assert.Equal(bef, uom);
@@ -86,9 +86,7 @@ public class Minus
         UnitOfAmount bef = uom;
 
         // 例外の確認
-        var exception = Assert.Throws<InvalidOperationException>(() => uom.Minus(999));
-        // エラーメッセージの確認
-        Assert.Equal("Value is negative", exception.Message);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => uom.Minus(999));
         // イミュータブルであることの確認
         Assert.Equal(998, uom.Value);
         Assert.Equal(bef, uom);
@@ -141,9 +139,7 @@ public class Minus
         UnitOfAmount bef2 = uom2;
 
         // 例外の確認
-        var exception = Assert.Throws<InvalidOperationException>(() => uom1.Minus(uom2));
-        // エラーメッセージの確認
-        Assert.Equal("Value is negative", exception.Message);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => uom1.Minus(uom2));
         // イミュータブルであることの確認
         Assert.Equal(998, uom1.Value);
         Assert.Equal(bef1, uom1);

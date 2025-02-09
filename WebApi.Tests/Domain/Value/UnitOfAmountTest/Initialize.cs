@@ -21,8 +21,7 @@ public class Initialize
     [Fact]
     public void TestIntNegativeValue()
     {
-        var exception = Assert.Throws<InvalidOperationException>(() => new UnitOfAmount(-1));
-        Assert.Equal("Value is negative", exception.Message);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new UnitOfAmount(-1));
     }
 
     [Fact]
@@ -42,7 +41,6 @@ public class Initialize
     [Fact]
     public void TestThresholdValue003()
     {
-        var exception = Assert.Throws<InvalidOperationException>(() => new UnitOfAmount(1001));
-        Assert.Equal("Value is too big", exception.Message);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => new UnitOfAmount(1001));
     }
 }

@@ -1,35 +1,31 @@
-using System.ComponentModel;
-using System.Reflection.Metadata.Ecma335;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using Microsoft.OpenApi.Any;
-
 namespace WebApi.Domain.Value;
+
+/// <summary>
+/// 数量を表す値オブジェクト.
+/// </summary>
 public record UnitOfAmount
 {
+    /// <summary>
+    /// 数量.
+    /// </summary>
     public decimal Value { get; init; }
 
+    /// <summary>
+    /// コンストラクタ.
+    /// </summary>
+    /// <param name="value">値</param>
+    /// <exception cref="ArgumentOutOfRangeException">0未満または1000を超える場合</exception>
     public UnitOfAmount(decimal value)
     {
-        Validate(value);
+        if (value < 0 || value > 1000)
+        {
+            throw new ArgumentOutOfRangeException(nameof(value));
+        }
         Value = value;
-    }
-
-    private void Validate(decimal value)
-    {
-        if (value < 0)
-        {
-            throw new InvalidOperationException("Value is negative");
-        }
-        if (value > 1000)
-        {
-            throw new InvalidOperationException("Value is too big");
-        }
     }
 
     public UnitOfAmount Add(decimal val)
     {
-        Validate(val);
         return new(Value + val);
     }
 
@@ -40,7 +36,6 @@ public record UnitOfAmount
 
     public UnitOfAmount Minus(decimal val)
     {
-        Validate(val);
         return new(Value - val);
     }
 

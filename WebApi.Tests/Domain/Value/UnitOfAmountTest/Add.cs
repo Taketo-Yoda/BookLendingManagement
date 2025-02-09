@@ -10,10 +10,10 @@ public class Add
         UnitOfAmount uom = new(1);
         UnitOfAmount bef = uom;
 
-        // 例外の確認
-        var exception = Assert.Throws<InvalidOperationException>(() => uom.Add(-1));
-        // エラーメッセージの確認
-        Assert.Equal("Value is negative", exception.Message);
+        UnitOfAmount result = uom.Add(-1);
+
+        // 結果の確認
+        Assert.Equal(0, result.Value);
         // イミュータブルであることの確認
         Assert.Equal(1, uom.Value);
         Assert.Equal(bef, uom);
@@ -86,9 +86,7 @@ public class Add
         UnitOfAmount bef = uom;
 
         // 例外の確認
-        var exception = Assert.Throws<InvalidOperationException>(() => uom.Add(3));
-        // エラーメッセージの確認
-        Assert.Equal("Value is too big", exception.Message);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => uom.Add(3));
         // イミュータブルであることの確認
         Assert.Equal(998, uom.Value);
         Assert.Equal(bef, uom);
@@ -141,9 +139,7 @@ public class Add
         UnitOfAmount bef2 = uom2;
 
         // 例外の確認
-        var exception = Assert.Throws<InvalidOperationException>(() => uom1.Add(uom2));
-        // エラーメッセージの確認
-        Assert.Equal("Value is too big", exception.Message);
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() => uom1.Add(uom2));
         // イミュータブルであることの確認
         Assert.Equal(998, uom1.Value);
         Assert.Equal(bef1, uom1);
